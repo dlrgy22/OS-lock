@@ -110,7 +110,7 @@ void bst_test(int num_threads,int node_count){
 
     srand(time(NULL));
     for (i=0; i < node_count; i++) { 
-        data[i] = rand()%100;
+        data[i] = rand()%100000;
     }
 
     if (!(threads = (thread_arg*)malloc(sizeof(thread_arg) * num_threads)))
@@ -284,8 +284,8 @@ int main(int argc, char *argv[])
     int num_threads=0, node_count=0;
     int fd;
     optind = 0;
-    num_threads = 10;
-    node_count = 100000;
+    num_threads = 1;
+    node_count = 1000000;
     while ((op = getopt(argc, argv, "tc:")) != -1) {
         switch (op) {
             case 't':

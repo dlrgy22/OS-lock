@@ -146,7 +146,58 @@ int lab2_node_insert_cg(lab2_tree *tree, lab2_node *new_node){
  */
 int lab2_node_remove(lab2_tree *tree, int key) {
     // You need to implement lab2_node_remove function.
-    
+    lab2_node *parent, *del, *change, *change_parent, *child;
+    parent = NULL;
+    del = tree->root;
+    while((del != NULL ) &&( del->key != key)){                                 //p가 NULL이거나 key값이 같을때까지반복
+        parent = del;
+        if(key < del->key){                                                   //주어진 key값이 p의 key값보다 작으면 left로이동
+            del = del->left;
+        }
+        else{                                                               //주어진 key값이 p의 key값보다 크면 right로 이동
+            del = del->right;
+        }
+    }
+    if(del == NULL){                                                          //NULL이면 주어진 key값이 없는것 이므로 return
+        return 0;
+    }
+    if(del->left == NULL && del->right == NULL){                                //삭제하고자하는 node의 자식이 없을때
+        if(parent != NULL){
+            if(parent->left == del)                                           //삭제하고자하는 node가 왼쪽에 존재했을경우
+                parent->left = NULL;
+            else                                                            //삭제하고자하는 node가 오른쪽에 존재했을경우
+                parent->right = NULL;
+        }
+        else                                                                //삭제하고자하는 node가 root인경우
+            tree->root = NULL;
+    }
+    else if(del->left == NULL || del->right == NULL){                           //삭제하고자하는 node의 자식이 1개만 있을때
+        if(del->left != NULL)                                                 //왼쪽 자식이 있을때
+            child = del->left;
+        else                                                                //오른쪽에 자식이 있을때
+            child = del->right;
+        if(parent != NULL){
+            if(parent->left == del)                                           //삭제하고자 하는 node가 왼쪽에 있을때
+                parent->left = child;
+            else                                                            //삭제하고자 하는 node가 오른쪽에 있을때
+                parent->right = child;
+        }
+    }
+    else{                                                                   //삭제하고자하는 node의 자식이 2개 모두 있을때
+        change_parent = del;
+        change = del->left;                                                     //왼쪽에서 가장 큰 node를 찾기위해
+        while(change->right != NULL){                                         //NULL이 될때까지 오른쪽으로
+            change_parent = change;
+            change = change->right;
+        }
+        if(change_parent->left == change)                                       //바꾸고자 하는 node가 왼쪽자식일때
+            change_parent->left = change->left;
+        else                                                                //오른쪽 자식일때
+            change_parent->right = change->left;
+        del->key = change->key;
+        del = change;
+    }
+    free(del);
 }
 
 /* 

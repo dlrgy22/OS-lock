@@ -41,6 +41,7 @@ typedef struct lab2_node {
  *  struct lab2_node *root  : root node of bst.
  */
 typedef struct lab2_tree {
+    pthread_mutex_t tree_mutex;
     struct lab2_node *root;
 } lab2_tree;
 
@@ -73,7 +74,7 @@ int lab2_node_remove(lab2_tree *tree, int key);
 int lab2_node_remove_fg(lab2_tree *tree, int key);
 int lab2_node_remove_cg(lab2_tree *tree, int key);
 void lab2_tree_delete(lab2_tree *tree);
-void lab2_node_delete(lab2_node *node);
+void lab2_node_delete(lab2_node *node,lab2_node *parents);
 
 
 /*

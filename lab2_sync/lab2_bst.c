@@ -123,58 +123,44 @@ int lab2_node_insert(lab2_tree *tree, lab2_node *new_node){
  */
 int lab2_node_insert_fg(lab2_tree *tree, lab2_node *new_node){
       // You need to implement lab2_node_insert_fg function.
-    lab2_node *tmp_old;
+    lab2_node *tmp,*tmp_parents;
 
-    tmp_old = tree->root;
+    tmp = tree->root;
 
-    if(tmp_old == NULL){
+    if(tmp == NULL){
         pthread_mutex_lock(&tree->tree_mutex);
         tree->root = new_node;
-        //printf("%d\n",tree->root->key);
         pthread_mutex_unlock(&tree->tree_mutex);
         return 1;                                       //입력 성공
     }
 
     while(1){
-        //printf("making tree!\n");
-        if(tmp_old->key == new_node->key){
+        if(tmp->key == new_node->key){
             return 0;                                   //입력 실패(이미 같은 값을 데이터 보관)
         }
-        if(tmp_old->key > new_node->key){              //부모보다 작을때  left를 확인
-            // pthread_mutex_lock(&tmp_old->mutex);
-            if(tmp_old->left){
-                tmp_old = tmp_old->left;
-
-                //lab2_node_insert_fg(parent, new_node);
+        if(tmp->key > new_node->key){              //부모보다 작을때  left를 확인
+            if(tmp->left){
+                pthread_mutex_trylock(&tmp->mutex);
+                tmp = tmp->left;
+                pthread_mutex_unlock(&tmp->mutex);
             }
             else{
-                pthread_mutex_lock(&tmp_old->mutex);
-                tmp_old->left = new_node;
-                //printf("left!\n");
-                pthread_mutex_unlock(&tmp_old->mutex);
-
+                tmp->left = new_node;
                 return 1;                               //입력 성공
             }
         }
         else{                                           //부모보다 클때 right를 확인
-
-            if(tmp_old->right){
-
-                tmp_old = tmp_old->right;
-
-
+            if(tmp->right){
+                pthread_mutex_trylock(&tmp->mutex);
+                tmp = tmp->right;
+                pthread_mutex_unlock(&tmp->mutex);
             }
             else{
-                pthread_mutex_lock(&tmp_old->mutex);
-                tmp_old->right = new_node;
-                // printf("right!\n");
-                pthread_mutex_unlock(&tmp_old->mutex);
-
+                tmp->right = new_node;
                 return 1;                               //입력 성공
             }
         }
     }
-
 }
 
 /* 

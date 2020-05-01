@@ -43,10 +43,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync
+CMAKE_SOURCE_DIR = /Users/jeong-ighyo/Desktop/bst/lab2_sync
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/lab2_sync.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/lab2_sync.dir/flags.make
 
 CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o: CMakeFiles/lab2_sync.dir/flags.make
 CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o: ../include/lab2_timeval.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o   -c /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/include/lab2_timeval.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o   -c /Users/jeong-ighyo/Desktop/bst/lab2_sync/include/lab2_timeval.c
 
 CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/include/lab2_timeval.c > CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jeong-ighyo/Desktop/bst/lab2_sync/include/lab2_timeval.c > CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.i
 
 CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/include/lab2_timeval.c -o CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jeong-ighyo/Desktop/bst/lab2_sync/include/lab2_timeval.c -o CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.s
 
 CMakeFiles/lab2_sync.dir/lab2_bst.c.o: CMakeFiles/lab2_sync.dir/flags.make
 CMakeFiles/lab2_sync.dir/lab2_bst.c.o: ../lab2_bst.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/lab2_sync.dir/lab2_bst.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lab2_sync.dir/lab2_bst.c.o   -c /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/lab2_sync.dir/lab2_bst.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lab2_sync.dir/lab2_bst.c.o   -c /Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst.c
 
 CMakeFiles/lab2_sync.dir/lab2_bst.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lab2_sync.dir/lab2_bst.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst.c > CMakeFiles/lab2_sync.dir/lab2_bst.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst.c > CMakeFiles/lab2_sync.dir/lab2_bst.c.i
 
 CMakeFiles/lab2_sync.dir/lab2_bst.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lab2_sync.dir/lab2_bst.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst.c -o CMakeFiles/lab2_sync.dir/lab2_bst.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst.c -o CMakeFiles/lab2_sync.dir/lab2_bst.c.s
 
 CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o: CMakeFiles/lab2_sync.dir/flags.make
 CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o: ../lab2_bst_test.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o   -c /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst_test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o   -c /Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst_test.c
 
 CMakeFiles/lab2_sync.dir/lab2_bst_test.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lab2_sync.dir/lab2_bst_test.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst_test.c > CMakeFiles/lab2_sync.dir/lab2_bst_test.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst_test.c > CMakeFiles/lab2_sync.dir/lab2_bst_test.c.i
 
 CMakeFiles/lab2_sync.dir/lab2_bst_test.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lab2_sync.dir/lab2_bst_test.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst_test.c -o CMakeFiles/lab2_sync.dir/lab2_bst_test.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst_test.c -o CMakeFiles/lab2_sync.dir/lab2_bst_test.c.s
 
 # Object files for target lab2_sync
 lab2_sync_OBJECTS = \
@@ -110,7 +110,7 @@ lab2_sync: CMakeFiles/lab2_sync.dir/lab2_bst.c.o
 lab2_sync: CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o
 lab2_sync: CMakeFiles/lab2_sync.dir/build.make
 lab2_sync: CMakeFiles/lab2_sync.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable lab2_sync"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable lab2_sync"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lab2_sync.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +123,6 @@ CMakeFiles/lab2_sync.dir/clean:
 .PHONY : CMakeFiles/lab2_sync.dir/clean
 
 CMakeFiles/lab2_sync.dir/depend:
-	cd /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/jeong-ighyo/Desktop/bst/lab2_sync /Users/jeong-ighyo/Desktop/bst/lab2_sync /Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug /Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug /Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/lab2_sync.dir/depend
 

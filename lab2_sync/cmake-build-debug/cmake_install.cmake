@@ -1,4 +1,4 @@
-# Install script for directory: /Users/jung-ikhyo/Desktop/OS-lock/lab2_sync
+# Install script for directory: /Users/jeong-ighyo/Desktop/bst/lab2_sync
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

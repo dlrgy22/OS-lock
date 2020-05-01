@@ -285,7 +285,7 @@ int main(int argc, char *argv[])
     int fd;
     optind = 0;
     num_threads = 1;
-    node_count = 10;
+    node_count = 100;
     while ((op = getopt(argc, argv, "tc:")) != -1) {
         switch (op) {
             case 't':

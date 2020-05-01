@@ -346,8 +346,8 @@ int lab2_node_remove_cg(lab2_tree *tree, int key) {
  */
 void lab2_tree_delete(lab2_tree *tree) {
     // You need to implement lab2_tree_delete function.
-    lab2_node_delete(tree->root);
-    tree->root = NULL;
+    lab2_node_delete(tree->root,tree->root);
+    free(tree);
 }
 
 /*
@@ -358,14 +358,18 @@ void lab2_tree_delete(lab2_tree *tree) {
  *  @param lab2_tree *tree  : bst node which you want to remove. 
  *  @return                 : status(success or fail)
  */
-void lab2_node_delete(lab2_node *node) {
+void lab2_node_delete(lab2_node *node,lab2_node *parents) {
     // You need to implement lab2_node_delete function.
     if(node)
     {
-        lab2_node_delete(node->left);
-        lab2_node_delete(node->right);
-        if(node != NULL)
-            free(node);
+        lab2_node_delete(node->left,node);
+        parents->left = NULL;
+        lab2_node_delete(node->right,node);
+        parents->right = NULL;
+        if(parents == node){
+            return;
+        }
+        free(node);
     }
 }
 

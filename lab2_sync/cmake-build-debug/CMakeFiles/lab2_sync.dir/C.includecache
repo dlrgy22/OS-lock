@@ -10,7 +10,7 @@
 pthread.h
 -
 
-/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst.c
+/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst.c
 stdio.h
 -
 stdlib.h
@@ -22,5 +22,5 @@ pthread.h
 string.h
 -
 lab2_sync_types.h
-/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_sync_types.h
+/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_sync_types.h
 

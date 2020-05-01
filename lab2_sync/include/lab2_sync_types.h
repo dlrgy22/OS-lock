@@ -102,4 +102,5 @@ void lab2_spin_unlock(int volatile *lock);
 /* lab2_timeval.c related function */
 double get_timeval(struct timeval *tv, struct timeval *tv_end);
 
+
 #endif /* LAB2_HEADER_H*/

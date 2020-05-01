@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/lab2_sync_types.h
+pthread.h
+-
+
+/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst.c
+stdio.h
+-
+stdlib.h
+-
+assert.h
+-
+pthread.h
+-
+string.h
+-
+lab2_sync_types.h
+/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_sync_types.h
+

@@ -139,7 +139,7 @@ int lab2_node_insert_fg(lab2_tree *tree, lab2_node *new_node){
             pthread_mutex_unlock(&tmp->mutex);
             return 0;                                   //입력 실패(이미 같은 값을 데이터 보관)
         }
-        if(tmp->key > new_node->key){              //부모보다 작을때  left를 확인
+        else if(tmp->key > new_node->key){              //부모보다 작을때  left를 확인
             if(tmp->left){
 
                 tmp_parents = tmp;
@@ -194,7 +194,6 @@ int lab2_node_insert_cg(lab2_tree *tree, lab2_node *new_node){
         return 1;                                       //입력 성공
     }
 
-
     while(1){
         if(tmp->key == new_node->key){
             pthread_mutex_unlock(&tree->tree_mutex);
@@ -233,11 +232,11 @@ int lab2_node_insert_cg(lab2_tree *tree, lab2_node *new_node){
  */
 int lab2_node_remove(lab2_tree *tree, int key) {
     // You need to implement lab2_node_remove function.
-    lab2_node *parent, *del, *change, *change_parent, *child;
-    parent = NULL;
+    lab2_node *del_parent, *del, *change, *change_parent, *child;
+    del_parent = NULL;
     del = tree->root;
     while((del != NULL ) &&( del->key != key)){                                 //p가 NULL이거나 key값이 같을때까지반복
-        parent = del;
+        del_parent = del;
         if(key < del->key){                                                     //주어진 key값이 p의 key값보다 작으면 left로이동
             del = del->left;
         }
@@ -249,11 +248,11 @@ int lab2_node_remove(lab2_tree *tree, int key) {
         return 0;
     }
     if(del->left == NULL && del->right == NULL){                                //삭제하고자하는 node의 자식이 없을때
-        if(parent != NULL){
-            if(parent->left == del)                                           //삭제하고자하는 node가 왼쪽에 존재했을경우
-                parent->left = NULL;
+        if(del_parent != NULL){
+            if(del_parent->left == del)                                           //삭제하고자하는 node가 왼쪽에 존재했을경우
+                del_parent->left = NULL;
             else                                                            //삭제하고자하는 node가 오른쪽에 존재했을경우
-                parent->right = NULL;
+                del_parent->right = NULL;
         }
         else                                                                //삭제하고자하는 node가 root인경우
             tree->root = NULL;
@@ -263,11 +262,11 @@ int lab2_node_remove(lab2_tree *tree, int key) {
             child = del->left;
         else                                                                //오른쪽에 자식이 있을때
             child = del->right;
-        if(parent != NULL){
-            if(parent->left == del)                                           //삭제하고자 하는 node가 왼쪽에 있을때
-                parent->left = child;
+        if(del_parent != NULL){
+            if(del_parent->left == del)                                           //삭제하고자 하는 node가 왼쪽에 있을때
+                del_parent->left = child;
             else                                                            //삭제하고자 하는 node가 오른쪽에 있을때
-                parent->right = child;
+                del_parent->right = child;
         }
         else
             tree->root = child;
@@ -300,58 +299,64 @@ int lab2_node_remove(lab2_tree *tree, int key) {
  */
 int lab2_node_remove_fg(lab2_tree *tree, int key) {
     // You need to implement lab2_node_remove_fg function.
-    lab2_node *parent, *del, *change, *change_parent, *child;
-    parent = NULL;
-    pthread_mutex_t remove_lock;
-    int rc = pthread_mutex_init(&remove_lock,NULL);
+    lab2_node *del_parent, *del, *change, *change_parent, *child;
+    del_parent = NULL;
     del = tree->root;
     while((del != NULL ) &&( del->key != key)){                                 //p가 NULL이거나 key값이 같을때까지반복
-        parent = del;
+        del_parent = del;
+        pthread_mutex_lock(&del_parent->mutex);
         if(key < del->key){                                                      //주어진 key값이 p의 key값보다 작으면 left로이동
-            pthread_mutex_trylock(&del->mutex);
+            del_parent = del;
             del = del->left;
-            pthread_mutex_unlock(&del->mutex);
+            pthread_mutex_lock(&del->mutex);
+            pthread_mutex_unlock(&del_parent->mutex);
         }
         else{                                                               //주어진 key값이 p의 key값보다 크면 right로 이동
-            pthread_mutex_trylock(&del->mutex);
+            del_parent = del;
             del = del->right;
-            pthread_mutex_unlock(&del->mutex);
+            pthread_mutex_lock(&del->mutex);
+            pthread_mutex_unlock(&del_parent->mutex);
         }
+        pthread_mutex_unlock(&del->mutex);
     }
     if(del == NULL){                                                          //NULL이면 주어진 key값이 없는것 이므로 return
         return 0;
     }
-    pthread_mutex_lock(&remove_lock);
+    pthread_mutex_lock(&tree->tree_mutex);
     if(del->left == NULL && del->right == NULL){                                //삭제하고자하는 node의 자식이 없을때
-
-        if(parent != NULL){
-            if(parent->left == del) {                                          //삭제하고자하는 node가 왼쪽에 존재했을경우
-                parent->left = NULL;
+        //pthread_mutex_lock(&tree->tree_mutex);
+        if(del_parent != NULL){
+            if(del_parent->left == del) {                                          //삭제하고자하는 node가 왼쪽에 존재했을경우
+                del_parent->left = NULL;
             }
             else {                                                           //삭제하고자하는 node가 오른쪽에 존재했을경우
-                parent->right = NULL;
+                del_parent->right = NULL;
             }
         }
         else                                                                //삭제하고자하는 node가 root인경우
             tree->root = NULL;
+        pthread_mutex_unlock(&tree->tree_mutex);
     }
     else if(del->left == NULL || del->right == NULL){                           //삭제하고자하는 node의 자식이 1개만 있을때
+        //pthread_mutex_lock(&tree->tree_mutex);
         if(del->left != NULL)                                                 //왼쪽 자식이 있을때
             child = del->left;
         else                                                                //오른쪽에 자식이 있을때
             child = del->right;
-        if(parent != NULL){
-            if(parent->left == del) {                                           //삭제하고자 하는 node가 왼쪽에 있을때
-                parent->left = child;
+        if(del_parent != NULL){
+            if(del_parent->left == del) {                                           //삭제하고자 하는 node가 왼쪽에 있을때
+                del_parent->left = child;
             }
             else {                                                            //삭제하고자 하는 node가 오른쪽에 있을때
-                parent->right = child;
+                del_parent->right = child;
             }
         }
         else
             tree->root = child;
+        pthread_mutex_unlock(&tree->tree_mutex);
     }
     else{                                                                   //삭제하고자하는 node의 자식이 2개 모두 있을때
+        //pthread_mutex_lock(&tree->tree_mutex);
         change_parent = del;
         change = del->left;                                                     //왼쪽에서 가장 큰 node를 찾기위해
         while(change->right != NULL){                                         //NULL이 될때까지 오른쪽으로
@@ -364,8 +369,8 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
             change_parent->right = change->left;
         del->key = change->key;
         del = change;
+        pthread_mutex_unlock(&tree->tree_mutex);
     }
-    pthread_mutex_unlock(&remove_lock);
     del = NULL;
     free(del);
 }
@@ -381,12 +386,12 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
  */
 int lab2_node_remove_cg(lab2_tree *tree, int key) {
     // You need to implement lab2_node_remove_cg function.
-    lab2_node *parent, *del, *change, *change_parent, *child;
-    parent = NULL;
+    lab2_node *del_parent, *del, *change, *change_parent, *child;
+    del_parent = NULL;
     del = tree->root;
     pthread_mutex_lock(&tree->tree_mutex);
     while((del != NULL ) &&( del->key != key)){                                 //p가 NULL이거나 key값이 같을때까지반복
-        parent = del;
+        del_parent = del;
         if(key < del->key){                                                   //주어진 key값이 p의 key값보다 작으면 left로이동
             del = del->left;
         }
@@ -396,16 +401,16 @@ int lab2_node_remove_cg(lab2_tree *tree, int key) {
     }
 
     if(del == NULL){                                                          //NULL이면 주어진 key값이 없는것 이므로 return
-        pthread_mutex_lock(&tree->tree_mutex);
+        pthread_mutex_unlock(&tree->tree_mutex);
         return 0;
     }
     if(del->left == NULL && del->right == NULL){                                //삭제하고자하는 node의 자식이 없을때
-        if(parent != NULL){
+        if(del_parent != NULL){
 
-            if(parent->left == del)                                           //삭제하고자하는 node가 왼쪽에 존재했을경우
-                parent->left = NULL;
+            if(del_parent->left == del)                                           //삭제하고자하는 node가 왼쪽에 존재했을경우
+                del_parent->left = NULL;
             else                                                            //삭제하고자하는 node가 오른쪽에 존재했을경우
-                parent->right = NULL;
+                del_parent->right = NULL;
 
 
         }
@@ -421,12 +426,12 @@ int lab2_node_remove_cg(lab2_tree *tree, int key) {
         else                                                                //오른쪽에 자식이 있을때
             child = del->right;
 
-        if(parent != NULL){
+        if(del_parent != NULL){
 
-            if(parent->left == del)                                           //삭제하고자 하는 node가 왼쪽에 있을때
-                parent->left = child;
+            if(del_parent->left == del)                                           //삭제하고자 하는 node가 왼쪽에 있을때
+                del_parent->left = child;
             else                                                            //삭제하고자 하는 node가 오른쪽에 있을때
-                parent->right = child;
+                del_parent->right = child;
         }
         else
             tree->root = child;

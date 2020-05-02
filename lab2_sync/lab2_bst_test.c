@@ -284,8 +284,8 @@ int main(int argc, char *argv[])
     int num_threads=0, node_count=0;
     int fd;
     optind = 0;
-    num_threads = 10;
-    node_count = 10000;
+    num_threads = 100;
+    node_count = 100000;
     while ((op = getopt(argc, argv, "tc:")) != -1) {
         switch (op) {
             case 't':

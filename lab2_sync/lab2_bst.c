@@ -123,46 +123,51 @@ int lab2_node_insert(lab2_tree *tree, lab2_node *new_node){
  */
 int lab2_node_insert_fg(lab2_tree *tree, lab2_node *new_node){
       // You need to implement lab2_node_insert_fg function.
-    lab2_node *tmp,*tmp_parents;
+    lab2_node *tmp_parents, *tmp;
 
     tmp = tree->root;
-    pthread_mutex_t write_lock,read_lock;
-    int rc = pthread_mutex_init(&write_lock,NULL);
+
     if(tmp == NULL){
         pthread_mutex_lock(&tree->tree_mutex);
         tree->root = new_node;
         pthread_mutex_unlock(&tree->tree_mutex);
         return 1;                                       //입력 성공
     }
-
+    pthread_mutex_lock(&tmp->mutex);
     while(1){
         if(tmp->key == new_node->key){
+            pthread_mutex_unlock(&tmp->mutex);
             return 0;                                   //입력 실패(이미 같은 값을 데이터 보관)
         }
         if(tmp->key > new_node->key){              //부모보다 작을때  left를 확인
             if(tmp->left){
-                pthread_mutex_trylock(&tmp->mutex);
+
+                tmp_parents = tmp;
                 tmp = tmp->left;
-                pthread_mutex_unlock(&tmp->mutex);
+                pthread_mutex_lock(&tmp->mutex);
+                pthread_mutex_unlock(&tmp_parents->mutex);
+
             }
             else{
-                pthread_mutex_lock(&write_lock);
                 tmp->left = new_node;
-                pthread_mutex_unlock(&write_lock);
+                pthread_mutex_unlock(&tmp->mutex);
                 return 1;                               //입력 성공
             }
         }
         else{                                           //부모보다 클때 right를 확인
+
             if(tmp->right){
-                pthread_mutex_trylock(&tmp->mutex);
+
+                tmp_parents = tmp;
                 tmp = tmp->right;
-                pthread_mutex_unlock(&tmp->mutex);
+                pthread_mutex_lock(&tmp->mutex);
+                pthread_mutex_unlock(&tmp_parents->mutex);
             }
             else{
-                pthread_mutex_lock(&write_lock);
                 tmp->right = new_node;
-                pthread_mutex_unlock(&write_lock);
+                pthread_mutex_unlock(&tmp->mutex);
                 return 1;                               //입력 성공
+
             }
         }
     }
@@ -233,7 +238,7 @@ int lab2_node_remove(lab2_tree *tree, int key) {
     del = tree->root;
     while((del != NULL ) &&( del->key != key)){                                 //p가 NULL이거나 key값이 같을때까지반복
         parent = del;
-        if(key < del->key){                                                   //주어진 key값이 p의 key값보다 작으면 left로이동
+        if(key < del->key){                                                     //주어진 key값이 p의 key값보다 작으면 left로이동
             del = del->left;
         }
         else{                                                               //주어진 key값이 p의 key값보다 크면 right로 이동
@@ -297,25 +302,35 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
     // You need to implement lab2_node_remove_fg function.
     lab2_node *parent, *del, *change, *change_parent, *child;
     parent = NULL;
+    pthread_mutex_t remove_lock;
+    int rc = pthread_mutex_init(&remove_lock,NULL);
     del = tree->root;
     while((del != NULL ) &&( del->key != key)){                                 //p가 NULL이거나 key값이 같을때까지반복
         parent = del;
-        if(key < del->key){                                                   //주어진 key값이 p의 key값보다 작으면 left로이동
+        if(key < del->key){                                                      //주어진 key값이 p의 key값보다 작으면 left로이동
+            pthread_mutex_trylock(&del->mutex);
             del = del->left;
+            pthread_mutex_unlock(&del->mutex);
         }
         else{                                                               //주어진 key값이 p의 key값보다 크면 right로 이동
+            pthread_mutex_trylock(&del->mutex);
             del = del->right;
+            pthread_mutex_unlock(&del->mutex);
         }
     }
     if(del == NULL){                                                          //NULL이면 주어진 key값이 없는것 이므로 return
         return 0;
     }
+    pthread_mutex_lock(&remove_lock);
     if(del->left == NULL && del->right == NULL){                                //삭제하고자하는 node의 자식이 없을때
+
         if(parent != NULL){
-            if(parent->left == del)                                           //삭제하고자하는 node가 왼쪽에 존재했을경우
+            if(parent->left == del) {                                          //삭제하고자하는 node가 왼쪽에 존재했을경우
                 parent->left = NULL;
-            else                                                            //삭제하고자하는 node가 오른쪽에 존재했을경우
+            }
+            else {                                                           //삭제하고자하는 node가 오른쪽에 존재했을경우
                 parent->right = NULL;
+            }
         }
         else                                                                //삭제하고자하는 node가 root인경우
             tree->root = NULL;
@@ -326,10 +341,12 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
         else                                                                //오른쪽에 자식이 있을때
             child = del->right;
         if(parent != NULL){
-            if(parent->left == del)                                           //삭제하고자 하는 node가 왼쪽에 있을때
+            if(parent->left == del) {                                           //삭제하고자 하는 node가 왼쪽에 있을때
                 parent->left = child;
-            else                                                            //삭제하고자 하는 node가 오른쪽에 있을때
+            }
+            else {                                                            //삭제하고자 하는 node가 오른쪽에 있을때
                 parent->right = child;
+            }
         }
         else
             tree->root = child;
@@ -348,6 +365,7 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
         del->key = change->key;
         del = change;
     }
+    pthread_mutex_unlock(&remove_lock);
     del = NULL;
     free(del);
 }

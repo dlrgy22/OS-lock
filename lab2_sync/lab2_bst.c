@@ -1,8 +1,8 @@
 /*
-*	Operating System Lab
-*	    Lab2 (Synchronization)
-*	    Student id : 
-*	    Student name : 
+*    Operating System Lab
+*        Lab2 (Synchronization)
+*        Student id :
+*        Student name :
 *
 *   lab2_bst.c :
 *       - thread-safe bst code.
@@ -19,28 +19,31 @@
 
 #include "lab2_sync_types.h"
 
+int node_count = 0;
 /*
  * TODO
  *  Implement funtction which traverse BST in in-order
- *  
- *  @param lab2_tree *tree  : bst to print in-order. 
+ *
+ *  @param lab2_tree *tree  : bst to print in-order.
  *  @return                 : status (success or fail)
  */
-int lab2_node_print_inorder(lab2_node *root) {                          //변경
+int lab2_node_print_inorder(lab2_node *root,int count) {                          //변경
     // You need to implement lab2_node_print_inorder function.
     if (root == NULL){
-        return 1;
+        return count;
     }
-    lab2_node_print_inorder(root->left);                               //왼쪽부터 중간 오른쪽 순으로 출
+    count += 1;
+    count = lab2_node_print_inorder(root->left,count);                              //왼쪽부터 중간 오른쪽 순으로 출력
     printf("%d ",root->key);
-    lab2_node_print_inorder(root->right);
+    count = lab2_node_print_inorder(root->right,count);
+    return count;
 }
 
 /*
  * TODO
  *  Implement function which creates struct lab2_tree
  *  ( refer to the ./include/lab2_sync_types.h for structure lab2_tree )
- * 
+ *
  *  @return                 : bst which you created in this function.
  */
 lab2_tree *lab2_tree_create() {
@@ -71,12 +74,12 @@ lab2_node * lab2_node_create(int key) {
     return node;                                                    //node 반환
 }
 
-/* 
+/*
  * TODO
- *  Implement a function which insert nodes from the BST. 
- *  
+ *  Implement a function which insert nodes from the BST.
+ *
  *  @param lab2_tree *tree      : bst which you need to insert new node.
- *  @param lab2_node *new_node  : bst node which you need to insert. 
+ *  @param lab2_node *new_node  : bst node which you need to insert.
  *  @return                 : satus (success or fail)
  */
 int lab2_node_insert(lab2_tree *tree, lab2_node *new_node){
@@ -113,12 +116,12 @@ int lab2_node_insert(lab2_tree *tree, lab2_node *new_node){
     return 1;
 }
 
-/* 
+/*
  * TODO
  *  Implement a function which insert nodes from the BST in fine-garined manner.
  *
  *  @param lab2_tree *tree      : bst which you need to insert new node in fine-grained manner.
- *  @param lab2_node *new_node  : bst node which you need to insert. 
+ *  @param lab2_node *new_node  : bst node which you need to insert.
  *  @return                     : status (success or fail)
  */
 int lab2_node_insert_fg(lab2_tree *tree, lab2_node *new_node){
@@ -173,12 +176,12 @@ int lab2_node_insert_fg(lab2_tree *tree, lab2_node *new_node){
     }
 }
 
-/* 
+/*
  * TODO
  *  Implement a function which insert nodes from the BST in coarse-garined manner.
  *
  *  @param lab2_tree *tree      : bst which you need to insert new node in coarse-grained manner.
- *  @param lab2_node *new_node  : bst node which you need to insert. 
+ *  @param lab2_node *new_node  : bst node which you need to insert.
  *  @return                     : status (success or fail)
  */
 int lab2_node_insert_cg(lab2_tree *tree, lab2_node *new_node){
@@ -222,12 +225,12 @@ int lab2_node_insert_cg(lab2_tree *tree, lab2_node *new_node){
     }
 }
 
-/* 
+/*
  * TODO
  *  Implement a function which remove nodes from the BST.
  *
  *  @param lab2_tree *tree  : bst tha you need to remove node from bst which contains key.
- *  @param int key          : key value that you want to delete. 
+ *  @param int key          : key value that you want to delete.
  *  @return                 : status (success or fail)
  */
 int lab2_node_remove(lab2_tree *tree, int key) {
@@ -289,12 +292,12 @@ int lab2_node_remove(lab2_tree *tree, int key) {
     free(del);
 }
 
-/* 
+/*
  * TODO
  *  Implement a function which remove nodes from the BST in fine-grained manner.
  *
  *  @param lab2_tree *tree  : bst tha you need to remove node in fine-grained manner from bst which contains key.
- *  @param int key          : key value that you want to delete. 
+ *  @param int key          : key value that you want to delete.
  *  @return                 : status (success or fail)
  */
 int lab2_node_remove_fg(lab2_tree *tree, int key) {
@@ -328,13 +331,17 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
         if(del_parent != NULL){
             if(del_parent->left == del) {                                          //삭제하고자하는 node가 왼쪽에 존재했을경우
                 del_parent->left = NULL;
+                //pthread_mutex_unlock(&tree->tree_mutex);
             }
             else {                                                           //삭제하고자하는 node가 오른쪽에 존재했을경우
                 del_parent->right = NULL;
+                //pthread_mutex_unlock(&tree->tree_mutex);
             }
         }
-        else                                                                //삭제하고자하는 node가 root인경우
+        else {                                                               //삭제하고자하는 node가 root인경우
             tree->root = NULL;
+            //pthread_mutex_unlock(&tree->tree_mutex);
+        }
         pthread_mutex_unlock(&tree->tree_mutex);
     }
     else if(del->left == NULL || del->right == NULL){                           //삭제하고자하는 node의 자식이 1개만 있을때
@@ -346,13 +353,17 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
         if(del_parent != NULL){
             if(del_parent->left == del) {                                           //삭제하고자 하는 node가 왼쪽에 있을때
                 del_parent->left = child;
+                //pthread_mutex_unlock(&tree->tree_mutex);
             }
             else {                                                            //삭제하고자 하는 node가 오른쪽에 있을때
                 del_parent->right = child;
+                //pthread_mutex_unlock(&tree->tree_mutex);
             }
         }
-        else
+        else{
             tree->root = child;
+            //pthread_mutex_unlock(&tree->tree_mutex);
+        }
         pthread_mutex_unlock(&tree->tree_mutex);
     }
     else{                                                                   //삭제하고자하는 node의 자식이 2개 모두 있을때
@@ -365,7 +376,7 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
         }
         if(change_parent->left == change)                                       //바꾸고자 하는 node가 왼쪽자식일때
             change_parent->left = change->left;
-        else                                                                //오른쪽 자식일때
+        else                                                                  //오른쪽 자식일때
             change_parent->right = change->left;
         del->key = change->key;
         del = change;
@@ -376,12 +387,12 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
 }
 
 
-/* 
+/*
  * TODO
  *  Implement a function which remove nodes from the BST in coarse-grained manner.
  *
  *  @param lab2_tree *tree  : bst tha you need to remove node in coarse-grained manner from bst which contains key.
- *  @param int key          : key value that you want to delete. 
+ *  @param int key          : key value that you want to delete.
  *  @return                 : status (success or fail)
  */
 int lab2_node_remove_cg(lab2_tree *tree, int key) {
@@ -464,7 +475,7 @@ int lab2_node_remove_cg(lab2_tree *tree, int key) {
  *  Implement function which delete struct lab2_tree
  *  ( refer to the ./include/lab2_sync_types.h for structure lab2_node )
  *
- *  @param lab2_tree *tree  : bst which you want to delete. 
+ *  @param lab2_tree *tree  : bst which you want to delete.
  *  @return                 : status(success or fail)
  */
 void lab2_tree_delete(lab2_tree *tree) {
@@ -478,7 +489,7 @@ void lab2_tree_delete(lab2_tree *tree) {
  *  Implement function which delete struct lab2_node
  *  ( refer to the ./include/lab2_sync_types.h for structure lab2_node )
  *
- *  @param lab2_tree *tree  : bst node which you want to remove. 
+ *  @param lab2_tree *tree  : bst node which you want to remove.
  *  @return                 : status(success or fail)
  */
 void lab2_node_delete(lab2_node *node,lab2_node *parents) {
@@ -495,4 +506,3 @@ void lab2_node_delete(lab2_node *node,lab2_node *parents) {
         free(node);
     }
 }
-

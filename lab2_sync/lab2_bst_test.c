@@ -56,8 +56,8 @@ static void print_result(lab2_tree *tree,int num_threads,int node_count ,int is_
     printf("    execution time      : %lf seconds \n\n",time);
 
     printf("\n BST inorder iteration result : \n");
-    result_count=lab2_node_print_inorder(tree->root);
-    printf("    total node count    : %d \n\n",node_count);
+    result_count=lab2_node_print_inorder(tree->root,0);
+    printf("\n    total node count    : %d \n\n",result_count);
 
 
 }
@@ -284,8 +284,8 @@ int main(int argc, char *argv[])
     int num_threads=0, node_count=0;
     int fd;
     optind = 0;
-    num_threads = 100;
-    node_count = 100000;
+    num_threads = 10;
+    node_count = 10000;
     while ((op = getopt(argc, argv, "tc:")) != -1) {
         switch (op) {
             case 't':

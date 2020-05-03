@@ -1,0 +1,3 @@
+/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir

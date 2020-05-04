@@ -323,7 +323,8 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
             }
         }
     }
-    pthread_mutex_unlock(&del->mutex);
+    if(del != NULL)
+        pthread_mutex_unlock(&del->mutex);
     if(del == NULL){                                                            //NULL이면 주어진 key값이 없는것 이므로 return
         return 0;
     }

@@ -286,8 +286,8 @@ int lab2_node_remove(lab2_tree *tree, int key) {
         else
             tree->root = child;
     }
-    del = NULL;
     free(del);
+    del = NULL;
 }
 
 /*

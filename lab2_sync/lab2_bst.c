@@ -34,7 +34,7 @@ int lab2_node_print_inorder(lab2_node *root,int count) {                        
     }
     count += 1;
     count = lab2_node_print_inorder(root->left,count);                              //왼쪽부터 중간 오른쪽 순으로 출력
-    printf("%d ",root->key);
+    //printf("%d ",root->key);
     count = lab2_node_print_inorder(root->right,count);
     return count;
 }

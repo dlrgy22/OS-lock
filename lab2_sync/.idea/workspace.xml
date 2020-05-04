@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated />
+    <generated>
+      <config projectName="lab2_sync" targetName="lab2_sync" />
+    </generated>
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -29,7 +31,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0dac8962-9e16-4df1-952a-452799856b17" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2_bonus_test.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/lab2_timeval.o" beforeDir="false" afterPath="$PROJECT_DIR$/include/lab2_timeval.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2_bonus_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/lab2_bonus_test.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab2_bst_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/lab2_bst_test.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +43,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -55,6 +59,13 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="lab2_sync" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lab2_sync" TARGET_NAME="lab2_sync" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="lab2_sync" RUN_TARGET_NAME="lab2_sync">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -92,6 +103,10 @@
       <workItem from="1588510575203" duration="2000" />
       <workItem from="1588510644902" duration="195000" />
       <workItem from="1588510940937" duration="3000" />
+      <workItem from="1588553010653" duration="4000" />
+      <workItem from="1588555230832" duration="16000" />
+      <workItem from="1588564868538" duration="56000" />
+      <workItem from="1588564934253" duration="7000" />
     </task>
     <servers />
   </component>

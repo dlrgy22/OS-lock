@@ -1,0 +1,3 @@
+/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir

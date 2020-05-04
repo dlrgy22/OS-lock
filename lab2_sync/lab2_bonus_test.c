@@ -146,6 +146,8 @@ int main(int argc, char *argv[]){
                 goto INVALID_ARGS;
         }
     }
+    num_threads = 10;
+    num_iterations = 100;
     if((num_threads > 0) && (num_iterations > 0) && (is_sync != LAB2_ERROR)){
         your_spinlock_test(num_threads,num_iterations,is_sync);
     }else{

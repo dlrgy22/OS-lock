@@ -284,19 +284,6 @@ int main(int argc, char *argv[])
     int num_threads=0, node_count=0;
     int fd;
     optind = 0;
-    
-    while ((op = getopt(argc, argv, "tc:")) != -1) {
-        switch (op) {
-            case 't':
-                num_threads=atoi(optarg);
-                break;
-            case 'c':
-                node_count = atoi(optarg);
-                break;
-            default:
-                goto INVALID_ARGS;
-        }
-    }
     num_threads = atoi(argv[2]);
     node_count = atoi(argv[4]);
     if((num_threads>0) && (node_count > 0)){

@@ -366,8 +366,8 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
         del->key = change->key;
         pthread_mutex_unlock(&change->mutex);
         pthread_mutex_unlock(&del->mutex);
-        change = NULL;
         free(change);
+        change = NULL;
         if(del_parent != NULL)
             pthread_mutex_unlock(&del_parent->mutex);
     }
@@ -484,6 +484,7 @@ void lab2_tree_delete(lab2_tree *tree) {
     // You need to implement lab2_tree_delete function.
     lab2_node_delete(tree->root,tree->root);
     free(tree);
+    tree = NULL;
 }
 
 /*
@@ -501,6 +502,7 @@ void lab2_node_delete(lab2_node *node,lab2_node *parents) {
         lab2_node_delete(node->left,node);
         lab2_node_delete(node->right,node);
         free(node);
+        node = NULL;
         if(parents == node){
             return;
         }

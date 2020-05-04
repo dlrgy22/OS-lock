@@ -6,5 +6,5 @@ C_FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk 
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/include 
+C_INCLUDES = -I/Users/jeong-ighyo/Desktop/bst/lab2_sync/include 
 

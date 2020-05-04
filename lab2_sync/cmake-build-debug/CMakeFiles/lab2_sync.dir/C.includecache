@@ -10,17 +10,27 @@
 pthread.h
 -
 
-/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst.c
+/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst_test.c
 stdio.h
 -
 stdlib.h
 -
 assert.h
 -
-pthread.h
+time.h
+-
+fcntl.h
 -
 string.h
 -
+unistd.h
+-
+time.h
+-
+sys/time.h
+-
+unistd.h
+-
 lab2_sync_types.h
-/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_sync_types.h
+/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_sync_types.h
 

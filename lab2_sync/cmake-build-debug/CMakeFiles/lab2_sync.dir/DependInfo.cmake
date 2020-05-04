@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/include/lab2_timeval.c" "/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o"
-  "/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst.c" "/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/lab2_bst.c.o"
-  "/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/lab2_bst_test.c" "/Users/jung-ikhyo/Desktop/OS-lock/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o"
+  "/Users/jeong-ighyo/Desktop/bst/lab2_sync/include/lab2_timeval.c" "/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/include/lab2_timeval.c.o"
+  "/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst.c" "/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/lab2_bst.c.o"
+  "/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst_test.c" "/Users/jeong-ighyo/Desktop/bst/lab2_sync/cmake-build-debug/CMakeFiles/lab2_sync.dir/lab2_bst_test.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

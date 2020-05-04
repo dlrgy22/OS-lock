@@ -309,14 +309,18 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
         if(key < del->key){                                                      //주어진 key값이 p의 key값보다 작으면 left로이동
             del_parent = del;
             del = del->left;
-            pthread_mutex_lock(&del->mutex);
-            pthread_mutex_unlock(&del_parent->mutex);
+            if(del != NULL) {
+                pthread_mutex_lock(&del->mutex);
+                pthread_mutex_unlock(&del_parent->mutex);
+            }
         }
         else if (key > del->key){                                                                    //주어진 key값이 p의 key값보다 크면 right로 이동
             del_parent = del;
             del = del->right;
-            pthread_mutex_lock(&del->mutex);
-            pthread_mutex_unlock(&del_parent->mutex);
+            if(del != NULL) {
+                pthread_mutex_lock(&del->mutex);
+                pthread_mutex_unlock(&del_parent->mutex);
+            }
         }
     }
     pthread_mutex_unlock(&del->mutex);

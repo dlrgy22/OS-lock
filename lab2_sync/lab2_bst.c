@@ -499,12 +499,10 @@ void lab2_node_delete(lab2_node *node,lab2_node *parents) {
     if(node)
     {
         lab2_node_delete(node->left,node);
-        parents->left = NULL;
         lab2_node_delete(node->right,node);
-        parents->right = NULL;
+        free(node);
         if(parents == node){
             return;
         }
-        free(node);
     }
 }

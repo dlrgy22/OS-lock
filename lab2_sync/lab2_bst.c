@@ -340,8 +340,8 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
             tree->root = NULL;
         }
         pthread_mutex_unlock(&del->mutex);
-        del = NULL;
         free(del);
+        del = NULL;
     }
     else if(del->left != NULL && del->right != NULL){                           //삭제하고자하는 node의 자식이 2개 모두 있을때
         change_parent = del;
@@ -394,8 +394,9 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
             pthread_mutex_unlock(&child->mutex);
         }
         pthread_mutex_unlock(&del->mutex);
-        del = NULL;
         free(del);
+        del = NULL;
+
     }
 }
 

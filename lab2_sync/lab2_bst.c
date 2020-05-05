@@ -307,8 +307,6 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
     while((del != NULL ) &&( del->key != key)){                                  //p가 NULL이거나 key값이 같을때까지반복
         del_parent = del;
         if(key < del->key){                                                      //주어진 key값이 p의 key값보다 작으면 left로이동
-            if(del->left == NULL)
-                break;
             del_parent = del;
             del = del->left;
             if(del != NULL) {
@@ -317,8 +315,6 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
             }
         }
         else if (key > del->key){                                                //주어진 key값이 p의 key값보다 크면 right로 이동
-            if(del->right == NULL)
-                break;
             del_parent = del;
             del = del->right;
             if(del != NULL) {

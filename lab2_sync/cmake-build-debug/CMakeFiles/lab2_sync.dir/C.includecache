@@ -10,20 +10,6 @@
 pthread.h
 -
 
-/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst.c
-stdio.h
--
-stdlib.h
--
-assert.h
--
-pthread.h
--
-string.h
--
-lab2_sync_types.h
-/Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_sync_types.h
-
 /Users/jeong-ighyo/Desktop/bst/lab2_sync/lab2_bst_test.c
 stdio.h
 -

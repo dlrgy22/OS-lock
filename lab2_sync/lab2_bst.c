@@ -327,8 +327,10 @@ int lab2_node_remove_fg(lab2_tree *tree, int key) {
             }
         }
     }
-    pthread_mutex_unlock(&del->mutex);                                          //탐색이 끝났으므로 unlock
-    if(del == NULL){                                                            //NULL이면 주어진 key값이 없는것 이므로 return
+    if(del != NULL)
+        pthread_mutex_unlock(&del->mutex);                                          //탐색이 끝났으므로 unlock
+    else{                                                            //NULL이면 주어진 key값이 없는것 이므로 return
+        pthread_mutex_unlock(&del_parent->mutex);
         return 0;
     }
     if (del_parent != NULL)                                                     //del이 root노드가 아닐때 부모노드에 lock (root노드는 부모X)

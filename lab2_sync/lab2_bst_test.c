@@ -286,8 +286,6 @@ int main(int argc, char *argv[])
     optind = 0;
     num_threads = atoi(argv[2]);
     node_count = atoi(argv[4]);
-    num_threads = 4;
-    node_count = 100000;
     if((num_threads>0) && (node_count > 0)){
         bst_test(num_threads,node_count);
     }else{
